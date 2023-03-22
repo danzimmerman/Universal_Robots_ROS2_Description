@@ -96,7 +96,7 @@
       kinematics_parameters_file="${kinematics_parameters_file}"
       physical_parameters_file="${physical_parameters_file}"
       visual_parameters_file="${visual_parameters_file}"
-      force_abs_paths="${sim_gazebo or sim_ignition}"/>
+      force_abs_paths="false"/>
 
 
     <!-- ros2 control include -->
