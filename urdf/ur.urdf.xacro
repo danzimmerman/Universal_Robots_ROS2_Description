@@ -96,6 +96,14 @@
     <!-- Gazebo plugins -->
     <gazebo reference="world">
     </gazebo>
+    <gazebo reference="$(arg prefix)shoulder_pan_joint">
+      <axis>
+        <dynamics>
+          <damping>0.0</damping>
+          <friction>867530.9</friction>
+        </dynamics>
+      </axis>
+    </gazebo>
     <gazebo>
       <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
         <parameters>$(arg simulation_controllers)</parameters>
