@@ -41,7 +41,7 @@
    <xacro:arg name="tool_tcp_port" default="54321" />
 
      <!-- Simulation parameters -->
-   <xacro:arg name="use_fake_hardware" default="false" />
+   <xacro:arg name="use_fake_hardware" default="true" />
    <xacro:arg name="fake_sensor_commands" default="false" />
    <xacro:arg name="sim_gazebo" default="false" />
    <xacro:arg name="sim_ignition" default="false" />
@@ -78,35 +78,24 @@
      <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
    </xacro:ur_robot>
 
-   
-   <!-- ros2 control instance -->
+   <!-- ros2 control instance, follow this in your own package, ur_description prepares fake hardware -->
+   <!-- ur_robot_driver would construct the complicated block with all the real hardware parameters -->
    <xacro:ur_ros2_control
      name="$(arg name)" prefix="$(arg prefix)"
-     use_fake_hardware="$(arg use_fake_hardware)"
-     fake_sensor_commands="$(arg fake_sensor_commands)"
-     sim_gazebo="$(arg sim_gazebo)"
-     sim_ignition="$(arg sim_ignition)"
-     headless_mode="$(arg headless_mode)"
+     add_state_and_command_interfaces="true"
      initial_positions="${xacro.load_yaml(initial_positions_file)}"
-     use_tool_communication="$(arg use_tool_communication)"
-     tool_voltage="$(arg tool_voltage)"
-     tool_parity="$(arg tool_parity)"
-     tool_baud_rate="$(arg tool_baud_rate)"
-     tool_stop_bits="$(arg tool_stop_bits)"
-     tool_rx_idle_chars="$(arg tool_rx_idle_chars)"
-     tool_tx_idle_chars="$(arg tool_tx_idle_chars)"
-     tool_device_name="$(arg tool_device_name)"
-     tool_tcp_port="$(arg tool_tcp_port)"
-     robot_ip="$(arg robot_ip)"
-     script_filename="$(arg script_filename)"
-     output_recipe_filename="$(arg output_recipe_filename)"
-     input_recipe_filename="$(arg input_recipe_filename)"
-     reverse_ip="$(arg reverse_ip)"
-     script_command_port="$(arg script_command_port)"
-     tf_prefix=""
-     hash_kinematics="${kinematics_hash}"      
-     />
+      >
+      <hardware_system>
+         <hardware>
+            <plugin>mock_components/GenericSystem</plugin>
+            <param name="fake_sensor_commands">$(arg fake_sensor_commands)</param>
+            <param name="state_following_offset">0.0</param>
+         </hardware>
+      </hardware_system>
+   </xacro:ur_ros2_control>
 
+
+   <!-- dz: These move to their respective simulation packages -->
    <xacro:if value="$(arg sim_gazebo)">
     <!-- Gazebo plugins -->
     <gazebo reference="world">
