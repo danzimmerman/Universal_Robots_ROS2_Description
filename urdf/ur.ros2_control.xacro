@@ -4,7 +4,7 @@
   <xacro:macro name="ur_ros2_control" params="
     name
     prefix
-    add_state_and_command_interfaces
+    add_non_joint_interfaces:=true
     initial_positions:=${dict(shoulder_pan_joint=0.0,shoulder_lift_joint=-1.57,elbow_joint=0.0,wrist_1_joint=-1.57,wrist_2_joint=0.0,wrist_3_joint=0.0)}
     transmission_hw_interface:=hardware_interface/PositionJointInterface
     **hardware_system
@@ -114,7 +114,7 @@
         <state_interface name="effort"/>
       </joint>
 
-      <xacro:unless value="${add_state_and_command_interfaces}">
+      <xacro:if value="${add_non_joint_interfaces}">
         <sensor name="tcp_fts_sensor">
           <state_interface name="force.x"/>
           <state_interface name="force.y"/>
@@ -263,7 +263,7 @@
           <state_interface name="initialized"/>
         </gpio>
 
-      </xacro:unless>
+      </xacro:if>
 
     </ros2_control>
 

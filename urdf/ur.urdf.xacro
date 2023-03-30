@@ -82,7 +82,7 @@
    <!-- ur_robot_driver would construct the complicated block with all the real hardware parameters -->
    <xacro:ur_ros2_control
      name="$(arg name)" prefix="$(arg prefix)"
-     add_state_and_command_interfaces="true"
+     add_non_joint_interfaces="true"
      initial_positions="${xacro.load_yaml(initial_positions_file)}"
       >
       <hardware_system>
