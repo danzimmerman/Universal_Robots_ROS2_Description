@@ -84,7 +84,7 @@
      name="$(arg name)" prefix="$(arg prefix)"
      add_non_joint_interfaces="true"
      initial_positions="${xacro.load_yaml(initial_positions_file)}"
-      >
+   >
       <hardware_system>
          <hardware>
             <plugin>mock_components/GenericSystem</plugin>
