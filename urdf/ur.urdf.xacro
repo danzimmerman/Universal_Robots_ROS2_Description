@@ -89,7 +89,7 @@
    <!-- ros2 control, if needed -->
    <!-- ur_description might eventually prepare fake/mock hardware only, delegating the <hardware> block to a consumer package -->
    <xacro:property name="needs_non_joint_interfaces" value="${not (sim_gazebo or sim_ignition)}"/>
-   
+   <!-- Kinematics hash comes from read_model_data -->
    <xacro:ur_ros2_control
       name="$(arg name)" prefix="$(arg prefix)"
       add_non_joint_interfaces="${needs_non_joint_interfaces}"
@@ -118,6 +118,8 @@
                   reverse_ip="$(arg reverse_ip)"
                   script_command_port="$(arg script_command_port)"
                   transmission_hw_interface="$(arg transmission_hw_interface)"
+                  tf_prefix=""
+                  hash_kinematics="${kinematics_hash}" 
                />
             </xacro:unless>
             <xacro:if value="${fake_hardware and not (sim_gazebo or sim_ignition)}">
