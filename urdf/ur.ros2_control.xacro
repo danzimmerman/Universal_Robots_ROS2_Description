@@ -7,7 +7,7 @@
     add_non_joint_interfaces:=true
     initial_positions:=${dict(shoulder_pan_joint=0.0,shoulder_lift_joint=-1.57,elbow_joint=0.0,wrist_1_joint=-1.57,wrist_2_joint=0.0,wrist_3_joint=0.0)}
     transmission_hw_interface:=hardware_interface/PositionJointInterface
-    **hardware_system
+    **ros2_control_hardware
     ">
 
     <!-- Add URDF transmission elements (for ros_control) -->
@@ -15,7 +15,7 @@
 
     <ros2_control name="${name}" type="system">
       <!-- Start hardware dependency injection from outside the macro-->
-      <xacro:insert_block name="hardware_system" />
+      <xacro:insert_block name="ros2_control_hardware" />
       <!-- End hardware dependency injection -->
       <joint name="${prefix}shoulder_pan_joint">
         <command_interface name="position">

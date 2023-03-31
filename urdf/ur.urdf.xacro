@@ -97,7 +97,7 @@
       >
       <!-- dz: For now, I conditionally pass the right <hardware> as a block param. -->
       <!-- dz: Later, this wouldn't be necessary, a consumer package could create and pass it in its top-level xacro -->
-         <hardware_system>
+         <ros2_control_hardware>
             <xacro:unless value="${sim_gazebo or sim_ignition or fake_hardware}">
                <xacro:ur_real_hardware_block
                   headless_mode="$(arg headless_mode)"
@@ -139,7 +139,7 @@
                   <plugin>ign_ros2_control/IgnitionSystem</plugin>
                </hardware>
             </xacro:if>
-         </hardware_system>
+         </ros2_control_hardware>
    </xacro:ur_ros2_control>
 
 
