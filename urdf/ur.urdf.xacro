@@ -107,6 +107,7 @@
      hash_kinematics="${kinematics_hash}"      
      />
 
+
    <xacro:if value="$(arg sim_gazebo)">
     <!-- Gazebo plugins -->
     <gazebo reference="world">
